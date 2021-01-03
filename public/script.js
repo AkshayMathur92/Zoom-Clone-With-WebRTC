@@ -32,10 +32,7 @@ navigator.mediaDevices.getUserMedia({
   })
 
   addVideoStream(myVideo, stream)
-  return Promise.resolve(socket)
-}).then(socket => {
-    console.log('sending ready event')
-    socket.emit('peer-ready', myPeer.id)
+  socket.emit('peer-ready', myPeer.id)
 })
 
 socket.on('user-disconnected', userId => {
