@@ -11,7 +11,6 @@ navigator.mediaDevices.getUserMedia({
   video: true,
   audio: false
 }).then(stream => {
-
   myPeer.on('call', call => {
     console.log("a call is coming from another peer")
     call.answer(stream)
@@ -24,10 +23,18 @@ navigator.mediaDevices.getUserMedia({
 
   socket.on('user-connected', userId => {
     console.log("user connected socket", userId)
+  })
+
+  socket.on('peer-ready' , userId => {
+    console.log('peer - ready, connecting to peer')
     connectToNewUser(userId, stream)
   })
 
   addVideoStream(myVideo, stream)
+  return Promise.resolve(socket)
+}).then(socket => {
+    console.log('sending ready event')
+    socket.emit('peer-ready', myPeer.id)
 })
 
 socket.on('user-disconnected', userId => {

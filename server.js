@@ -19,18 +19,14 @@ io.on('connection', socket => {
   socket.on('join-room', (roomId, userId) => {
     console.log(userId + " joining room " + roomId)
     socket.join(roomId)
-    setTimeout(() => {
-      console.log("notifying other users a user is connected")
-      socket.to(roomId).broadcast.emit('user-connected', userId)
-    }, 5000);
     socket.on('disconnect', () => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
     })
+    socket.on('peer-ready', (userId)=> {
+      console.log('peer is ready', userId)
+      socket.to(roomId).broadcast.emit('peer-ready', userId);
+    })
   })
 })
-
-async function wasteTime(){
-  await new Promise(r => setTimeout(r, 2000));
-}
 
 server.listen(3000)
