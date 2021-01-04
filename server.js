@@ -26,6 +26,11 @@ io.on('connection', socket => {
       console.log('peer is ready', userId)
       socket.to(roomId).broadcast.emit('peer-ready', userId);
     })
+    socket.on('broadcast-message', (usedId, message)=> {
+      console.log(userId, ' is sending a message', message)
+      socket.emit('on-message', userId, message)
+      socket.to(roomId).broadcast.emit('on-message', usedId, message)
+    })
   })
 })
 

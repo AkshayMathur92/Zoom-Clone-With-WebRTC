@@ -1,5 +1,8 @@
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
+const chatForm = document.getElementById('chatForm')
+const messageList = document.getElementById('messages')
+const inputText = document.getElementById('txt')
 const myPeer = new Peer(undefined, {
   host: '/',
   port: '3001'
@@ -31,6 +34,28 @@ navigator.mediaDevices.getUserMedia({
     connectToNewUser(userId, stream)
   })
 
+  socket.on('on-message', (usedId, message) => {
+    console.log("I got the message from user ", usedId, "with message", message)
+    var messageItem = document.createElement("li");
+    var text = document.createTextNode(message)
+    messageItem.appendChild(document.createElement('style'))
+    if(myPeer.id == usedId){
+      messageItem.style.textAlign = "right";
+    }else{
+      messageItem.style.textAlign = "left"
+    }
+    messageItem.setAttribute('id',message);
+    messageItem.appendChild(text);
+    messageList.appendChild(messageItem);
+  })
+
+  chatForm.onsubmit = function(event){
+    console.log('used submitted a message')
+    event.preventDefault();
+    socket.emit('broadcast-message', myPeer.id, inputText.value)
+    inputText.value = ''
+    return false;
+  }
   addVideoStream(myVideo, stream)
   socket.emit('peer-ready', myPeer.id)
 })
