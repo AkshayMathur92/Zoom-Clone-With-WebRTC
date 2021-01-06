@@ -7,10 +7,10 @@ var myPeer = new Peer(undefined, {
   config: {'iceServers': [
     { url: 'stun:stun.l.google.com:19302' },
     { url: 'localhost:3478', credential: 'root' }
-  ],
+  ]},
   host : '/',
   port : '3301'
-}})
+})
 // const myPeer = new Peer(undefined, {
 //   host: '/',
 //   port: '3001'
