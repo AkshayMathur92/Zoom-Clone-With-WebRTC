@@ -27,6 +27,7 @@ app.use(function (req, res, next) {
 // use middleware
 app.use(cors({ credentials: true, origin: true }));
 app.use('/peerjs', peerServer);
+app.use('/peerjs/id', peerServer);
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
