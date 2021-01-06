@@ -14,7 +14,8 @@ const myPeer = new Peer(undefined, {
         urls: 'turn:3.135.225.255:3478',
         username: 'user',
         credential: 'root'
-      }
+      },
+      { urls: 'turn:0.peerjs.com:3478', username: 'peerjs', credential: 'peerjsp' }
     ],
     'sdpSemantics': 'unified-plan'
   }
