@@ -12,7 +12,7 @@ myVideo.muted = true
 const peers = {}
 navigator.mediaDevices.getUserMedia({
   video: true,
-  audio: false
+  audio: true 
 }).then(stream => {
   myPeer.on('call', call => {
     console.log("a call is coming from another peer" + call.peer)
