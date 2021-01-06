@@ -3,11 +3,9 @@ const videoGrid = document.getElementById('video-grid')
 const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
-var myPeer = new Peer(undefined, {})
-// const myPeer = new Peer(undefined, {
-//   host: '/',
-//   port: '3001'
-// })
+const myPeer = new Peer(undefined,{ 
+  host: '/peerserver',
+})
 const myVideo = document.createElement('video')
 myVideo.muted = true
 const peers = {}
