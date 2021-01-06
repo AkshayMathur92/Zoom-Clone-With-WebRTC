@@ -1,4 +1,3 @@
-const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
 const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
@@ -8,6 +7,7 @@ const myPeer = new Peer(undefined,{
   port:3000,
   path: ''
 })
+const socket = io('/')
 const myVideo = document.createElement('video')
 myVideo.muted = true
 const peers = {}
