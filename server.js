@@ -14,7 +14,7 @@ const cors = require('cors');
 
 
 // use middleware
-app.use(cors());
+app.use(cors({credentials: true, origin: true}));
 
 
 app.set('view engine', 'ejs')
