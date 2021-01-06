@@ -5,7 +5,7 @@ const inputText = document.getElementById('txt')
 const myPeer = new Peer(undefined,{ 
   host: '/',
   port:3000,
-  path: '/'
+  path: '/peerjs/peerserver'
 })
 const socket = io('/')
 const myVideo = document.createElement('video')
