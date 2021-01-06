@@ -17,7 +17,12 @@ const { v4: uuidV4 } = require('uuid')
 // import `cors` package
 const cors = require('cors');
 
-
+// CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // use middleware
 app.use(cors({credentials: true, origin: true}));
