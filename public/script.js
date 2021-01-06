@@ -9,7 +9,7 @@ var myPeer = new Peer(undefined, {
     { url: '3.135.225.255:3478', credential: 'root' }
   ]},
   host : '/',
-  port : '3301'
+  port : '3001'
 })
 // const myPeer = new Peer(undefined, {
 //   host: '/',
