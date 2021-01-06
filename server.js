@@ -8,11 +8,7 @@ const server = require('https').createServer({
   cert: fs.readFileSync('/home/ec2-user/server.crt')
 }, app);
 const peerServer = ExpressPeerServer(server, {
-path: '/',
-  ssl : {
-    key: fs.readFileSync('/home/ec2-user/key.pem'),
-    cert: fs.readFileSync('/home/ec2-user/server.crt')
-  }
+  path: '/'
 });
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
@@ -20,19 +16,19 @@ const { v4: uuidV4 } = require('uuid')
 const cors = require('cors');
 
 // CORS
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   next();
 });
 
 // use middleware
-app.use(cors({credentials: true, origin: true}));
+app.use(cors({ credentials: true, origin: true }));
 app.use('/peerjs', peerServer);
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
-app.get('/',  (req, res) => {
+app.get('/', (req, res) => {
   res.redirect(`/${uuidV4()}`)
 })
 
@@ -47,11 +43,11 @@ io.on('connection', socket => {
     socket.on('disconnect', () => {
       socket.to(roomId).broadcast.emit('user-disconnected', userId)
     })
-    socket.on('peer-ready', (userId)=> {
+    socket.on('peer-ready', (userId) => {
       console.log('peer is ready', userId)
       socket.to(roomId).broadcast.emit('peer-ready', userId);
     })
-    socket.on('broadcast-message', (usedId, message)=> {
+    socket.on('broadcast-message', (usedId, message) => {
       console.log(userId, ' is sending a message', message)
       socket.emit('on-message', userId, message)
       socket.to(roomId).broadcast.emit('on-message', usedId, message)
