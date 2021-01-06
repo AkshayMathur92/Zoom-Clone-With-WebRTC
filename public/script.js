@@ -13,7 +13,7 @@ const myPeer = new Peer(undefined, {
       {
         urls: 'turn:3.135.225.255:3478',
         username: 'user',
-        credentials: 'root'
+        credential: 'root'
       }
     ],
     'sdpSemantics': 'unified-plan'

@@ -7,7 +7,6 @@ const server = require('https').createServer({
   key: fs.readFileSync('/home/ec2-user/key.pem'),
   cert: fs.readFileSync('/home/ec2-user/server.crt')
 }, app);
-;
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
 // import `cors` package
