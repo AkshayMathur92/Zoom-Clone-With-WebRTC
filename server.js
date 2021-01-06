@@ -7,11 +7,7 @@ const server = require('https').createServer({
   key: fs.readFileSync('/home/ec2-user/key.pem'),
   cert: fs.readFileSync('/home/ec2-user/server.crt')
 }, app);
-const customGenerationFunction = () => (Math.random().toString(36) + '0000000000000000000').substr(2, 16);
-const peerServer = ExpressPeerServer(server, {
-  path: '/',
-  generateClientId: customGenerationFunction
-});
+;
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
 // import `cors` package
@@ -26,8 +22,6 @@ app.use(function (req, res, next) {
 
 // use middleware
 app.use(cors({ credentials: true, origin: true }));
-app.use('/peerjs', peerServer);
-app.use('/peerjs/id', peerServer);
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
@@ -59,3 +53,7 @@ io.on('connection', socket => {
 })
 
 server.listen(3000)
+const peerServer = ExpressPeerServer(server, {
+  path: '/',
+})
+app.use('/peerjs', peerServer);
