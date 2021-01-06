@@ -2,16 +2,6 @@ const videoGrid = document.getElementById('video-grid')
 const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
-const y = {};
-function checkSafari() {
-  let seemsChrome = navigator.userAgent.indexOf("Chrome") > -1;
-  let seemsSafari = navigator.userAgent.indexOf("Safari") > -1;
-  return seemsSafari && !seemsChrome;
-}
-
-if (checkSafari()) {
-  peerOptions.serialization = 'json';
-}
 const myPeer = new Peer(undefined, {
   host: '/',
   port: 3000,
