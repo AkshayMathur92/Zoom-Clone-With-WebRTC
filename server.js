@@ -1,9 +1,10 @@
 const express = require('express')
 const app = express()
+var fs = require('fs');
 // const server = require('http').Server(app)
 const server = require('https').createServer({
-  key: '/home/ec1-user/key.pem',
-  cert: '/home/ec1-user/server.crt'
+  key: fs.readFileSync('/home/ec2-user/key.pem'),
+  cert: fs.readFileSync('/home/ec2-user/server.crt')
 }, app);
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
