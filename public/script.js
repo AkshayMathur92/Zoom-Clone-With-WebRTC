@@ -11,7 +11,8 @@ const myPeer = new Peer(undefined, {
     'iceServers': [
       { urls: 'stun:stun.l.google.com:19302' },
       {
-        urls: 'turn:user@3.135.225.255:3478',
+        urls: 'turn:3.135.225.255:3478',
+        username: 'user',
         credentials: 'root'
       }
     ],
