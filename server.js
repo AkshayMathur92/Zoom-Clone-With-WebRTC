@@ -8,7 +8,11 @@ const server = require('https').createServer({
   cert: fs.readFileSync('/home/ec2-user/server.crt')
 }, app);
 const peerServer = ExpressPeerServer(server, {
-  path: '/'
+path: '/id',
+  ssl : {
+    key: fs.readFileSync('/home/ec2-user/key.pem'),
+    cert: fs.readFileSync('/home/ec2-user/server.crt')
+  }
 });
 app.use('/peerjs', peerServer);
 const io = require('socket.io')(server)
