@@ -2,10 +2,16 @@ const videoGrid = document.getElementById('video-grid')
 const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
-const myPeer = new Peer(undefined,{ 
+const myPeer = new Peer(undefined, {
   host: '/',
-  port:3000,
-  path: '/peerjs/peerserver'
+  port: 3000,
+  path: '/peerjs/peerserver',
+  secure: true,
+  config: { 'iceServers': [
+    { 'urls': 'stun:stun.l.google.com:19302'}
+  ],
+       'sdpSemantics': 'unified-plan' 
+  }
 })
 const socket = io('/')
 const myVideo = document.createElement('video')
