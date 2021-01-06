@@ -3,16 +3,24 @@ const videoGrid = document.getElementById('video-grid')
 const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
-const myPeer = new Peer(undefined, {
-  host: '/',
-  port: '3001'
-})
+var peer = new Peer(undefined, {
+  config: {'iceServers': [
+    { url: 'stun:stun.l.google.com:19302' },
+    { url: 'localhost:3478', credential: 'root' }
+  ],
+  host : '/',
+  port : '3301'
+}})
+// const myPeer = new Peer(undefined, {
+//   host: '/',
+//   port: '3001'
+// })
 const myVideo = document.createElement('video')
 myVideo.muted = true
 const peers = {}
 navigator.mediaDevices.getUserMedia({
   video: true,
-  audio: true 
+  audio: true
 }).then(stream => {
   myPeer.on('call', call => {
     console.log("a call is coming from another peer" + call.peer)
@@ -29,7 +37,7 @@ navigator.mediaDevices.getUserMedia({
     console.log("user connected socket", userId)
   })
 
-  socket.on('peer-ready' , userId => {
+  socket.on('peer-ready', userId => {
     console.log('peer - ready, connecting to peer')
     connectToNewUser(userId, stream)
   })
@@ -39,17 +47,17 @@ navigator.mediaDevices.getUserMedia({
     var messageItem = document.createElement("li");
     var text = document.createTextNode(message)
     messageItem.appendChild(document.createElement('style'))
-    if(myPeer.id == usedId){
+    if (myPeer.id == usedId) {
       messageItem.style.textAlign = "right";
-    }else{
+    } else {
       messageItem.style.textAlign = "left"
     }
-    messageItem.setAttribute('id',message);
+    messageItem.setAttribute('id', message);
     messageItem.appendChild(text);
     messageList.appendChild(messageItem);
   })
 
-  chatForm.onsubmit = function(event){
+  chatForm.onsubmit = function (event) {
     console.log('used submitted a message')
     event.preventDefault();
     socket.emit('broadcast-message', myPeer.id, inputText.value)
@@ -60,7 +68,7 @@ navigator.mediaDevices.getUserMedia({
 })
 
 socket.on('user-disconnected', userId => {
-  console.log('user disconnected' , userId)
+  console.log('user disconnected', userId)
   if (peers[userId]) peers[userId].close()
   if (document.getElementById(userId) !== null) document.getElementById(userId).remove();
 })
@@ -72,7 +80,7 @@ myPeer.on('open', id => {
 })
 
 function connectToNewUser(userId, stream) {
-  console.log("connecting to new user by making a call " )
+  console.log("connecting to new user by making a call ")
   const call = myPeer.call(userId, stream)
   console.log("called my peer")
   const video = document.createElement('video')
