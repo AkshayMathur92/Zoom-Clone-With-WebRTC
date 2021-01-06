@@ -3,7 +3,7 @@ const videoGrid = document.getElementById('video-grid')
 const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
-var peer = new Peer(undefined, {
+var myPeer = new Peer(undefined, {
   config: {'iceServers': [
     { url: 'stun:stun.l.google.com:19302' },
     { url: 'localhost:3478', credential: 'root' }
