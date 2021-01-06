@@ -8,7 +8,7 @@ const server = require('https').createServer({
   cert: fs.readFileSync('/home/ec2-user/server.crt')
 }, app);
 const peerServer = ExpressPeerServer(server, {
-path: '/peerserver',
+path: '/',
   ssl : {
     key: fs.readFileSync('/home/ec2-user/key.pem'),
     cert: fs.readFileSync('/home/ec2-user/server.crt')
