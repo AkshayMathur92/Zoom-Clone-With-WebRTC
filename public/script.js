@@ -2,6 +2,16 @@ const videoGrid = document.getElementById('video-grid')
 const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
+const y = {};
+function checkSafari() {
+  let seemsChrome = navigator.userAgent.indexOf("Chrome") > -1;
+  let seemsSafari = navigator.userAgent.indexOf("Safari") > -1;
+  return seemsSafari && !seemsChrome;
+}
+
+if (checkSafari()) {
+  peerOptions.serialization = 'json';
+}
 const myPeer = new Peer(undefined, {
   host: '/',
   port: 3000,
@@ -25,7 +35,9 @@ const myVideo = document.createElement('video')
 myVideo.muted = true
 const peers = {}
 navigator.mediaDevices.getUserMedia({
-  video: true,
+  video: {
+    facingMode: 'user'
+  },
   audio: true
 }).then(stream => {
   myPeer.on('call', call => {
@@ -34,6 +46,8 @@ navigator.mediaDevices.getUserMedia({
     console.log("answerred the call")
     const video = document.createElement('video')
     video.setAttribute('id', call.peer)
+    video.setAttribute('autoplay', '');
+    video.setAttribute('playsinline', '');
     call.on('stream', userVideoStream => {
       addVideoStream(video, userVideoStream)
     })
@@ -91,6 +105,8 @@ function connectToNewUser(userId, stream) {
   console.log("called my peer")
   const video = document.createElement('video')
   video.setAttribute('id', userId)
+  video.setAttribute('playsinline', '');
+  video.setAttribute('autoplay', '');
   call.on('stream', userVideoStream => {
     console.log("call is answered with stream")
     addVideoStream(video, userVideoStream)
