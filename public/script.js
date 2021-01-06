@@ -4,12 +4,8 @@ const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
 var myPeer = new Peer(undefined, {
-  config: {'iceServers': [
-    { url: 'stun:stun.l.google.com:19302' },
-    { url: '3.135.225.255:3478', credential: 'root' }
-  ]},
-  host : '/',
-  port : '3001'
+  host : '/peerserver',
+  port : '3000'
 })
 // const myPeer = new Peer(undefined, {
 //   host: '/',

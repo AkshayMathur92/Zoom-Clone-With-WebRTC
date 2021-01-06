@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 var fs = require('fs');
 const peerServer = require('peer').PeerServer({
-  port: 3001,
+  port: 3000,
+  path: '/peerserver',
   ssl: {
     key: fs.readFileSync('/home/ec2-user/key.pem'),
     cert: fs.readFileSync('/home/ec2-user/server.crt')
