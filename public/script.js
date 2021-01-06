@@ -7,10 +7,15 @@ const myPeer = new Peer(undefined, {
   port: 3000,
   path: '/peerjs/peerserver',
   secure: true,
-  config: { 'iceServers': [
-    { 'urls': 'stun:stun.l.google.com:19302'}
-  ],
-       'sdpSemantics': 'unified-plan' 
+  config: {
+    'iceServers': [
+      { urls: 'stun:stun.l.google.com:19302' },
+      {
+        urls: 'turn:3.135.225.255:3478',
+        credentials: 'root'
+      }
+    ],
+    'sdpSemantics': 'unified-plan'
   }
 })
 const socket = io('/')
