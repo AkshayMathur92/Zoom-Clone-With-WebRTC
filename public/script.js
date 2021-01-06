@@ -14,8 +14,7 @@ const myPeer = new Peer(undefined, {
         username: 'user',
         credential: 'root'
       },
-      { urls: 'stun:stun.l.google.com:19302' },
-      { urls: 'turn:0.peerjs.com:3478', username: 'peerjs', credential: 'peerjsp' }
+      { urls: 'stun:stun.l.google.com:19302' }
     ],
     'sdpSemantics': 'unified-plan'
   }
