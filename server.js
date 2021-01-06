@@ -10,6 +10,7 @@ const server = require('https').createServer({
 const peerServer = ExpressPeerServer(server, {
   path: '/peerserver'
 });
+app.use('/peerjs', peerServer);
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
 // import `cors` package
