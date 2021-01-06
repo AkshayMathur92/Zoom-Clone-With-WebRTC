@@ -14,7 +14,6 @@ path: '/',
     cert: fs.readFileSync('/home/ec2-user/server.crt')
   }
 });
-app.use('/peerjs', peerServer);
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
 // import `cors` package
@@ -29,8 +28,7 @@ app.use(function(req, res, next) {
 
 // use middleware
 app.use(cors({credentials: true, origin: true}));
-
-
+app.use('/peerjs', peerServer);
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
