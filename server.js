@@ -7,6 +7,7 @@ const server = require('https').createServer({
   key: fs.readFileSync('/home/ec2-user/key.pem'),
   cert: fs.readFileSync('/home/ec2-user/server.crt')
 }, app);
+const customGenerationFunction = () => (Math.random().toString(36) + '0000000000000000000').substr(2, 16);
 const peerServer = ExpressPeerServer(server, {
   path: '/',
   generateClientId: customGenerationFunction
