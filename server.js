@@ -1,14 +1,15 @@
 const express = require('express')
 const app = express()
 // const server = require('http').Server(app)
+const server = require('https').createServer({
+  key: '/home/ec1-user/key.pem',
+  cert: '/home/ec1-user/cert.pem'
+}, app);
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
 // import `cors` package
 const cors = require('cors');
-const server = require('https').createServer({
-  key: '/home/ec2-user/key.pem',
-  cert: '/home/ec2-user/cert.pem'
-}, app);
+
 
 
 // use middleware
