@@ -6,7 +6,7 @@ const inputText = document.getElementById('txt')
 const myPeer = new Peer(undefined,{ 
   host: '/',
   port:3000,
-  path: 'peerserver'
+  path: ''
 })
 const myVideo = document.createElement('video')
 myVideo.muted = true
