@@ -5,8 +5,7 @@ const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
 const myPeer = new Peer(undefined,{ 
   host: '/',
-  port:3000,
-  path:'/peerserver'
+  port:3000
 })
 const myVideo = document.createElement('video')
 myVideo.muted = true
