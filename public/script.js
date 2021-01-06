@@ -57,7 +57,6 @@ navigator.mediaDevices.getUserMedia({
     return false;
   }
   addVideoStream(myVideo, stream)
-  socket.emit('peer-ready', myPeer.id)
 })
 
 socket.on('user-disconnected', userId => {
@@ -69,6 +68,7 @@ socket.on('user-disconnected', userId => {
 myPeer.on('open', id => {
   console.log("User connected peer", id, ROOM_ID)
   socket.emit('join-room', ROOM_ID, id)
+  socket.emit('peer-ready', myPeer.id)
 })
 
 function connectToNewUser(userId, stream) {
