@@ -8,7 +8,8 @@ const server = require('https').createServer({
   cert: fs.readFileSync('/home/ec2-user/server.crt')
 }, app);
 const peerServer = ExpressPeerServer(server, {
-  path: '/'
+  path: '/',
+  generateClientId: customGenerationFunction
 });
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
