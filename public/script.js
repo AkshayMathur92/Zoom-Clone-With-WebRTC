@@ -4,7 +4,7 @@ const chatForm = document.getElementById('chatForm')
 const messageList = document.getElementById('messages')
 const inputText = document.getElementById('txt')
 var myPeer = new Peer(undefined, {
-  host : '/peerserver',
+  host : '/',
   port : '3000'
 })
 // const myPeer = new Peer(undefined, {
