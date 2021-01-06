@@ -9,8 +9,8 @@ const peerServer = require('peer').PeerServer({
   }}).listen()
 // const server = require('http').Server(app)
 const server = require('https').createServer({
-  key: fs.readFileSync('/home/ec2-user/key.pem'),
-  cert: fs.readFileSync('/home/ec2-user/server.crt')
+  key: fs.readFileSync('/home/ec2-user/peerkey.pem'),
+  cert: fs.readFileSync('/home/ec2-user/peerserver.crt')
 }, app);
 const io = require('socket.io')(server)
 const { v4: uuidV4 } = require('uuid')
