@@ -19,6 +19,7 @@ const myPeer = new Peer(undefined, {
     'sdpSemantics': 'unified-plan'
   }
 })
+myPeer.on('error', e => { alert(e)});
 const socket = io('/')
 const myVideo = document.createElement('video')
 myVideo.muted = true
