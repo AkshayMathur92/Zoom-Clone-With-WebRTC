@@ -6,7 +6,7 @@ const inputText = document.getElementById('txt')
 var myPeer = new Peer(undefined, {
   config: {'iceServers': [
     { url: 'stun:stun.l.google.com:19302' },
-    { url: 'localhost:3478', credential: 'root' }
+    { url: '3.135.225.255:3478', credential: 'root' }
   ]},
   host : '/',
   port : '3301'
